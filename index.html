@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NotaSpese</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+        <link rel="stylesheet" href="app.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <style>
+      
+        @-webkit-keyframes pulse {
+            0% {
+                background-color: #CCC;
+            }
+            25% {
+                background-color: #EEE;
+            }
+            50% {
+                background-color: #CCC;
+            }
+            75% {
+                background-color: #EEE;
+            }
+            100% {
+                background-color: #CCC;
+            }
+        }
+            
+        .scroll-page .loading {
+            margin: 12px auto;
+            border: 8px solid #AAA;
+            height: 16px;
+            width: 16px;
+            background: #CCC;
+            border-radius: 16px;
+            -webkit-animation: pulse 2s ease-in-out 0s infinite;                
+        }
+            
+        .my-btn{
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .my-inputnumber{
+            text-align: center;
+            font-size: 38px;
+            font-weight: bold;
+        }
+        
+        .credit-txt{
+            font-weight: bold;
+            color: dimgray;
+            font-size: 18px;
+        }  
+          
+        span.color_green
+        {
+            color: #3C7; 
+            font-weight: bold;
+            margin: 10px;    
+            padding-left: 10px;
+        }
+        span.color_red
+        {
+            color: #E54;
+            font-weight: bold;
+            margin: 10px;    
+            padding-left: 10px;
+        }
+        
+        .back_btn
+        {
+            padding: 15px 0 15px 27px !important;
+            height: 14px !important;
+            background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAoCAYAAADkDTpVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAxJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RUQxQ0FCN0VGMjJGMTFFMjg0REFDNDBBRUVBRjJBNDkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RUQxQ0FCN0RGMjJGMTFFMjg0REFDNDBBRUVBRjJBNDkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiBNYWNpbnRvc2giPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0iNTNBQzg4QkE2OTc3M0MxNDg4ODc1M0VDNzc3ODcwMDUiIHN0UmVmOmRvY3VtZW50SUQ9IjUzQUM4OEJBNjk3NzNDMTQ4ODg3NTNFQzc3Nzg3MDA1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+dT5F6gAAAcNJREFUeNqslz8sA1Ecx+9UKi1ispkwMAgbs5XYTCJhlLB3uxrETsLGUgMbutaqJg0Jg5pqqqVCm1TaPt+X3ONp7n53fb/3kk/Su8v7fq/v3u/Pc4UQjsWRAQNg9/eONLDEtvgbnrpvS3wDdMT/4dkyWAUtETy8PuaaL4EcSIQ8T3HefBHURfg4Bq6p+Dz4JMTPQML0G8yCGiF+BZKmu2gKVAnxG5DW5/QiPg4qhPgdGOmeF1d8DJQJ8UcwGjQ3jric+ESIl/0XcEwM5F++J8TfwCSlQYkPgltC/B3MRK1A2IMUKBDiH34sOCYGcg9fE+INP4odEwMZfeeE+DdY6SV29AsXnBDibbDWa+TrFweCHlsmeUv92IsQz5hm3bj1wLxwx1yiDneJ1Ec+JUxa3I+stukFYdLkbFM90PKESZ0TaIp0RKqocVKFYggUCZMqJ9np6bpEmFQ46VovOM+EyQun4Ogl85UweeCUTMVERNEvcoq+YjqibSlw2hbFXETjdclpvBQL4IswyXFaR735bRAmR5zmV7Hs56ewsc89H+TBOmiHPG/aOkJtBhyhsjbPaJKdbnFJv8Uj7CEYBkmQVTd/BBgAAQDbZCXVLesAAAAASUVORK5CYII=);
+            background-repeat: no-repeat;
+            -webkit-background-size: 12px 20px;
+            background-size: 12px 20px;
+            background-position: 8px center;
+            line-height: 14px !important;
+        }
+            
+            .del_list{
+                right: 17px;
+                position: absolute;
+                font-weight: 300;
+                color: red;
+            }
+
+    </style>
+    </head>
+
+    <body>
+        <div class="app-page" data-page="home">
+            <div class="app-topbar">
+                <div class="app-title">NotaSpese</div>
+            </div>
+            <div class="app-content">                
+                <div class="app-section">
+                  Benvenuto in NotaSpese, il modo più semplice e intuitivo per tenere sotto controllo i tuoi acquisti.
+                </div>
+                
+             <div class="app-section">
+                <span class="credit-txt">Credito borsellino</span>
+                <input id="borsellino" class="app-input my-inputnumber" readonly>  
+              </div>    
+                
+              <div class="app-section">
+                  <div class="app-button green my-btn" name="add">+</div>
+                    <input id="importo" type="number" class="app-input my-inputnumber" placeholder="00.00">
+                  <div class="app-button red my-btn" name="sub">-</div>  
+              </div>
+                
+              <div class="app-section">
+                <div class="app-button" data-target="dettagli">Dettagli</div>                  
+              </div>                                       
+            </div>
+        </div><!-- end page home -->
+
+        <div class="app-page" data-page="categorie">
+            <div class="app-topbar">
+                <div class="left app-button" data-back data-autotitle></div>
+                <div class="app-title">Categorie</div>
+            </div>
+            <div class="app-content">
+                
+                <div class="app-section">
+                  Seleziona la categoria di acquisto
+                </div>
+                
+                <ul class="app-list">
+                    <label>Seleziona categoria :</label>
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-shopping-cart"></i> Shopping</li>
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-cutlery"></i> Cibo</li>
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-car"></i> Auto&RC</li>
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-medkit"></i> Spese mediche</li>
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-home"></i> Utenze</li>
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-glass"></i> Divertimento</li> 
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-globe"></i> Altro</li>
+                </ul>
+            </div>
+        </div><!-- end page categorie -->
+        
+        <div class="app-page" data-page="dettagli">
+            <div class="app-topbar">
+                    <div class=" app-button back_btn">Home</div>
+                    <!-- div class="left app-button" data-back>Home</div -->
+                    <div class="app-title">Lista Movimenti</div>
+            </div>
+            <div class="app-content">
+				<ul id="lista-movimenti" class="app-list">					
+				</ul>
+			</div>
+        </div>
+
+        <!-- script src="zepto.js"></script -->
+        <script src="jquery-3.2.1.min%20.js"></script>
+        <script src="app.min.js"></script>
+        
+
+        <script>
+            if(typeof(Storage) == "undefined"){
+                
+                alert('Please upgrade your browser');
+                
+            }else{
+                
+                
+                function getCurrentDate(){
+                    var data_cur=new Date();
+                    var month = new Array();
+                    month[0] = "01";
+                    month[1] = "02";
+                    month[2] = "03";
+                    month[3] = "04";
+                    month[4] = "05";
+                    month[5] = "06";
+                    month[6] = "07";
+                    month[7] = "08";
+                    month[8] = "09";
+                    month[9] = "10";
+                    month[10] = "11";
+                    month[11] = "12";            
+                    
+                    var dt_formatted=data_cur.getDate()+"/"+month[data_cur.getMonth()]+"/"+data_cur.getFullYear()+" "+data_cur.getHours()+":"+data_cur.getMinutes();
+                    
+                    return dt_formatted;
+                }
+                
+                function cancellaLista(){
+                    try{
+                        
+                        if(localStorage.getItem('movimenti') != ""){
+                            localStorage.setItem("movimenti","");                      
+                            App.load("dettagli");
+                        }                                               
+                        
+                    }catch(err){
+                        console.log(err);
+                        alert("Errore durante la cancellazione della lista");
+                    }
+                } 
+
+                App.controller('home', function (page) {                   
+                    $(page).on("appShow",function(){                            
+                        //localStorage.removeItem("borsellino");
+                        
+                        if(!localStorage.getItem('borsellino')){
+                            localStorage.setItem("borsellino","00.00");
+                        }
+                        
+                        $('#borsellino').val(localStorage.getItem("borsellino")+" €");
+
+                        
+                        $(page).find('.my-btn').on('click',function(event){                                                                 
+
+                            var borsellino=parseFloat(localStorage.getItem("borsellino"));                        
+                            var cur_importo_app=parseFloat($('#importo').val());                                                                    
+                            var cur_importo=parseFloat(cur_importo_app.toFixed(2));    
+                            if(!isNaN(cur_importo)){                           
+                                var mov=[]
+                                var sender=event.target;
+                                if(sender.getAttribute("name")=="add"){
+                                    borsellino=borsellino+cur_importo;
+                                    var res_borsellino=borsellino.toFixed(2);    
+                                    mov = {"color":"green","categoria":"catg. selezionata","importo":"+"+cur_importo+" €","data":getCurrentDate(),"borsellino":res_borsellino};
+                                }else{
+                                    borsellino=borsellino-cur_importo;
+                                    var res_borsellino=borsellino.toFixed(2);
+                                    mov = {"color":"red","categoria":"catg. selezionata","importo":"-"+cur_importo+" €","data":getCurrentDate(),"borsellino":res_borsellino};
+                                }                             
+
+                                $('#importo').val("");
+                                //$('#borsellino').val(res_borsellino+" €");
+
+                                App.load("categorie",mov);
+
+                            }
+                        
+                        });  
+                    });
+                });
+                
+                App.controller('dettagli', function (page) {   
+                    
+                    $(page).on("appShow",function(){   
+                        var icons_cat = [];
+                        icons_cat["Shopping"]="fa-shopping-cart";
+                        icons_cat["Cibo"]="fa-cutlery";
+                        icons_cat["Auto&RC"]="fa-car";
+                        icons_cat["Spese mediche"]="fa-medkit";
+                        icons_cat["Utenze"]="fa-home";
+                        icons_cat["Divertimento"]="fa-glass";
+                        icons_cat["Altro"]="fa-globe";                    
+                    
+                        if(localStorage.getItem('movimenti') == ""){
+                            var html_txt="<label>Credito residuo: "+localStorage.getItem("borsellino")+" €</label><li>Nessun operazione effettuata</li>";
+                            $('#lista-movimenti').html(html_txt);
+                        }else{          
+                            var listamovimenti = JSON.parse(localStorage.getItem('movimenti'));
+                            var text="<label>Credito residuo: "+localStorage.getItem("borsellino")+" € <a href='#' class='del_list' onclick='cancellaLista()'><i class='fa fa-trash'> cancella lista</i></a></label>";
+                                                        
+                            
+                            for (i = 0; i < listamovimenti.length; i++) {                            
+                                var ctg=(listamovimenti[i].categoria).trim();                                
+                                var icon=icons_cat[ctg];                               
+                                text +=  "<li><i class='fa "+icon+"'></i> "+listamovimenti[i].categoria+"<span class='color_"+listamovimenti[i].color+"'>"+listamovimenti[i].importo+"</span> - ["+listamovimenti[i].data+"]";
+                            } 
+                            
+                           $('#lista-movimenti').html(text);
+                        }   
+                        
+                       $('.back_btn').on('click',function(){App.back("home");});
+                    });                                                                                    
+                                               
+                }); 
+
+                App.controller('categorie', function (page,movimento) {                       
+                    
+                    //localStorage.removeItem("movimenti");
+                    $(page).on("appShow",function(){                       
+                        console.log(movimento);
+                        
+                        var movimenti=[];
+                        if(!localStorage.getItem('movimenti')){
+                            localStorage.setItem("movimenti","");
+                        }else{
+                            movimenti=JSON.parse(localStorage.getItem('movimenti'));
+                        }
+                        
+                        $(page).find('.btncat').on('click',function(event){                                                        
+                            var res_borsellino=movimento.borsellino;                            
+                            movimento.categoria=$(this).text();                            
+                            delete movimento.borsellino;
+                            movimenti.unshift(movimento);                                                      
+                            localStorage.setItem("movimenti",JSON.stringify(movimenti));                            
+                            localStorage.setItem("borsellino",res_borsellino);
+                            
+                        });
+                    });
+                               
+                }); 
+                
+                
+
+                try {
+                    App.restore();                
+                } catch (err) {
+                    App.load('home');
+                }
+
+            }//Chiude else di check localStorage
+        </script>
+    </body>
+</html>
