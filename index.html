@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="app.min.css">
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
         <style>
-      
+
         @-webkit-keyframes pulse {
             0% {
                 background-color: #CCC;
@@ -24,7 +24,7 @@
                 background-color: #CCC;
             }
         }
-            
+
         .scroll-page .loading {
             margin: 12px auto;
             border: 8px solid #AAA;
@@ -32,9 +32,9 @@
             width: 16px;
             background: #CCC;
             border-radius: 16px;
-            -webkit-animation: pulse 2s ease-in-out 0s infinite;                
+            -webkit-animation: pulse 2s ease-in-out 0s infinite;
         }
-            
+
         .my-btn{
             font-size: 36px;
             font-weight: bold;
@@ -44,28 +44,28 @@
             font-size: 38px;
             font-weight: bold;
         }
-        
+
         .credit-txt{
             font-weight: bold;
             color: dimgray;
             font-size: 18px;
-        }  
-          
+        }
+
         span.color_green
         {
-            color: #3C7; 
+            color: #3C7;
             font-weight: bold;
-            margin: 10px;    
+            margin: 10px;
             padding-left: 10px;
         }
         span.color_red
         {
             color: #E54;
             font-weight: bold;
-            margin: 10px;    
+            margin: 10px;
             padding-left: 10px;
         }
-        
+
         .back_btn
         {
             padding: 15px 0 15px 27px !important;
@@ -77,13 +77,21 @@
             background-position: 8px center;
             line-height: 14px !important;
         }
-            
-            .del_list{
-                right: 17px;
-                position: absolute;
-                font-weight: 300;
-                color: red;
-            }
+
+        .del_list{
+            right: 17px;
+            position: absolute;
+            font-weight: 300;
+            color: red;
+        }
+
+        .right_btn{
+            right: 17px;
+            position: absolute;
+            font-weight: 300;
+        }
+        
+        .hidden{display:none}
 
     </style>
     </head>
@@ -93,25 +101,25 @@
             <div class="app-topbar">
                 <div class="app-title">NotaSpese</div>
             </div>
-            <div class="app-content">                
+            <div class="app-content">
                 <div class="app-section">
                   Benvenuto in NotaSpese, il modo più semplice e intuitivo per tenere sotto controllo i tuoi acquisti.
                 </div>
-                
+
              <div class="app-section">
                 <span class="credit-txt">Credito borsellino</span>
-                <input id="borsellino" class="app-input my-inputnumber" readonly>  
-              </div>    
-                
+                <input id="borsellino" class="app-input my-inputnumber" readonly>
+              </div>
+
               <div class="app-section">
                   <div class="app-button green my-btn" name="add">+</div>
                     <input id="importo" type="number" class="app-input my-inputnumber" placeholder="00.00">
-                  <div class="app-button red my-btn" name="sub">-</div>  
+                  <div class="app-button red my-btn" name="sub">-</div>
               </div>
-                
+
               <div class="app-section">
-                <div class="app-button" data-target="dettagli">Dettagli</div>                  
-              </div>                                       
+                <div class="app-button" data-target="dettagli">Dettagli</div>
+              </div>
             </div>
         </div><!-- end page home -->
 
@@ -121,11 +129,11 @@
                 <div class="app-title">Categorie</div>
             </div>
             <div class="app-content">
-                
+
                 <div class="app-section">
                   Seleziona la categoria di acquisto
                 </div>
-                
+
                 <ul class="app-list">
                     <label>Seleziona categoria :</label>
                     <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-shopping-cart"></i> Shopping</li>
@@ -133,12 +141,12 @@
                     <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-car"></i> Auto&RC</li>
                     <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-medkit"></i> Spese mediche</li>
                     <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-home"></i> Utenze</li>
-                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-glass"></i> Divertimento</li> 
+                    <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-glass"></i> Divertimento</li>
                     <li class="app-button btncat" data-target="dettagli"> <i class="fa fa-globe"></i> Altro</li>
                 </ul>
             </div>
         </div><!-- end page categorie -->
-        
+
         <div class="app-page" data-page="dettagli">
             <div class="app-topbar">
                     <div class=" app-button back_btn">Home</div>
@@ -146,24 +154,24 @@
                     <div class="app-title">Lista Movimenti</div>
             </div>
             <div class="app-content">
-				<ul id="lista-movimenti" class="app-list">					
-				</ul>
-			</div>
+                <ul id="lista-movimenti" class="app-list">
+                </ul>
+            </div>
         </div>
 
         <!-- script src="zepto.js"></script -->
         <script src="jquery-3.2.1.min%20.js"></script>
         <script src="app.min.js"></script>
-        
+
 
         <script>
             if(typeof(Storage) == "undefined"){
-                
+
                 alert('Please upgrade your browser');
-                
+
             }else{
-                
-                
+
+
                 function getCurrentDate(){
                     var data_cur=new Date();
                     var month = new Array();
@@ -178,55 +186,77 @@
                     month[8] = "09";
                     month[9] = "10";
                     month[10] = "11";
-                    month[11] = "12";            
-                    
+                    month[11] = "12";
+
                     var dt_formatted=data_cur.getDate()+"/"+month[data_cur.getMonth()]+"/"+data_cur.getFullYear()+" "+data_cur.getHours()+":"+data_cur.getMinutes();
-                    
+
                     return dt_formatted;
                 }
-                
+
                 function cancellaLista(){
                     try{
-                        
+
                         if(localStorage.getItem('movimenti') != ""){
-                            localStorage.setItem("movimenti","");                      
+                            localStorage.setItem("movimenti","");
                             App.load("dettagli");
-                        }                                               
-                        
+                        }
+
                     }catch(err){
                         console.log(err);
                         alert("Errore durante la cancellazione della lista");
                     }
-                } 
+                }
+                
+                function editMovimento(index){
+                    try{
+                        var listamovimenti = JSON.parse(localStorage.getItem('movimenti'));
+                        $('#mov'+index+'-edit').toggle();
+                    }catch(err){
+                        console.log(err);
+                        alert("Errore durante edit movimento");
+                    }
+                }
+                
+                function updateMovimento(index){
+                    try{
+                        var listamovimenti = JSON.parse(localStorage.getItem('movimenti'));
+                        listamovimenti[index].nota = $('#mov'+index+'-edit > input').val();
+                        localStorage.setItem("movimenti",JSON.stringify(listamovimenti));
+                        $('#mov'+index+'-edit').hide();
+                    }catch(err){
+                        console.log(err);
+                        alert("Errore durante edit movimento");
+                    }
+                }
 
-                App.controller('home', function (page) {                   
-                    $(page).on("appShow",function(){                            
+                App.controller('home', function (page) {
+                    $(page).on("appShow",function(){
                         //localStorage.removeItem("borsellino");
-                        
+
                         if(!localStorage.getItem('borsellino')){
                             localStorage.setItem("borsellino","00.00");
                         }
-                        
+
                         $('#borsellino').val(localStorage.getItem("borsellino")+" €");
 
-                        
-                        $(page).find('.my-btn').on('click',function(event){                                                                 
 
-                            var borsellino=parseFloat(localStorage.getItem("borsellino"));                        
-                            var cur_importo_app=parseFloat($('#importo').val());                                                                    
-                            var cur_importo=parseFloat(cur_importo_app.toFixed(2));    
-                            if(!isNaN(cur_importo)){                           
+                        $(page).find('.my-btn').on('click',function(event){
+
+                            var borsellino=parseFloat(localStorage.getItem("borsellino"));
+                            var cur_importo_app=parseFloat($('#importo').val());
+                            var cur_importo=parseFloat(cur_importo_app.toFixed(2));
+                            if(!isNaN(cur_importo)){
                                 var mov=[]
                                 var sender=event.target;
                                 if(sender.getAttribute("name")=="add"){
                                     borsellino=borsellino+cur_importo;
-                                    var res_borsellino=borsellino.toFixed(2);    
+                                    var res_borsellino=borsellino.toFixed(2);
                                     mov = {"color":"green","categoria":"catg. selezionata","importo":"+"+cur_importo+" €","data":getCurrentDate(),"borsellino":res_borsellino};
                                 }else{
                                     borsellino=borsellino-cur_importo;
                                     var res_borsellino=borsellino.toFixed(2);
                                     mov = {"color":"red","categoria":"catg. selezionata","importo":"-"+cur_importo+" €","data":getCurrentDate(),"borsellino":res_borsellino};
-                                }                             
+                                }
 
                                 $('#importo').val("");
                                 //$('#borsellino').val(res_borsellino+" €");
@@ -234,14 +264,14 @@
                                 App.load("categorie",mov);
 
                             }
-                        
-                        });  
+
+                        });
                     });
                 });
-                
-                App.controller('dettagli', function (page) {   
-                    
-                    $(page).on("appShow",function(){   
+
+                App.controller('dettagli', function (page) {
+
+                    $(page).on("appShow",function(){
                         var icons_cat = [];
                         icons_cat["Shopping"]="fa-shopping-cart";
                         icons_cat["Cibo"]="fa-cutlery";
@@ -249,60 +279,62 @@
                         icons_cat["Spese mediche"]="fa-medkit";
                         icons_cat["Utenze"]="fa-home";
                         icons_cat["Divertimento"]="fa-glass";
-                        icons_cat["Altro"]="fa-globe";                    
-                    
+                        icons_cat["Altro"]="fa-globe";
+
                         if(localStorage.getItem('movimenti') == ""){
                             var html_txt="<label>Credito residuo: "+localStorage.getItem("borsellino")+" €</label><li>Nessun operazione effettuata</li>";
                             $('#lista-movimenti').html(html_txt);
-                        }else{          
+                        }else{
                             var listamovimenti = JSON.parse(localStorage.getItem('movimenti'));
                             var text="<label>Credito residuo: "+localStorage.getItem("borsellino")+" € <a href='#' class='del_list' onclick='cancellaLista()'><i class='fa fa-trash'> cancella lista</i></a></label>";
-                                                        
-                            
-                            for (i = 0; i < listamovimenti.length; i++) {                            
-                                var ctg=(listamovimenti[i].categoria).trim();                                
-                                var icon=icons_cat[ctg];                               
-                                text +=  "<li><i class='fa "+icon+"'></i> "+listamovimenti[i].categoria+"<span class='color_"+listamovimenti[i].color+"'>"+listamovimenti[i].importo+"</span> - ["+listamovimenti[i].data+"]";
-                            } 
-                            
-                           $('#lista-movimenti').html(text);
-                        }   
-                        
-                       $('.back_btn').on('click',function(){App.back("home");});
-                    });                                                                                    
-                                               
-                }); 
 
-                App.controller('categorie', function (page,movimento) {                       
-                    
+                            for (i = 0; i < listamovimenti.length; i++) {
+                                var ctg=(listamovimenti[i].categoria).trim();
+                                var icon=icons_cat[ctg];
+                                if(typeof(listamovimenti[i].nota)=='undefined')
+                                    listamovimenti[i].nota = '';
+                                text +=  '<li id="mov'+i+'"><i class="fa '+icon+'"></i> '+listamovimenti[i].categoria+'<span class="color_'+listamovimenti[i].color+'">'+listamovimenti[i].importo+'</span> - ['+listamovimenti[i].data+'] <a href="#" class="right_btn" onclick="editMovimento('+i+')"><i class="fa fa-edit"></i></a></li>';
+                                text +=  '<li id="mov'+i+'-edit" class="hidden"><input type="text" placeholder="inserisci una nota" value="'+listamovimenti[i].nota+'"/><a href="#" class="right_btn" onclick="updateMovimento('+i+')">OK</a></li>';
+                            }
+
+                           $('#lista-movimenti').html(text);
+                        }
+
+                       $('.back_btn').on('click',function(){App.back("home");});
+                    });
+
+                });
+
+                App.controller('categorie', function (page,movimento) {
+
                     //localStorage.removeItem("movimenti");
-                    $(page).on("appShow",function(){                       
+                    $(page).on("appShow",function(){
                         console.log(movimento);
-                        
+
                         var movimenti=[];
                         if(!localStorage.getItem('movimenti')){
                             localStorage.setItem("movimenti","");
                         }else{
                             movimenti=JSON.parse(localStorage.getItem('movimenti'));
                         }
-                        
-                        $(page).find('.btncat').on('click',function(event){                                                        
-                            var res_borsellino=movimento.borsellino;                            
-                            movimento.categoria=$(this).text();                            
+
+                        $(page).find('.btncat').on('click',function(event){
+                            var res_borsellino=movimento.borsellino;
+                            movimento.categoria=$(this).text();
                             delete movimento.borsellino;
-                            movimenti.unshift(movimento);                                                      
-                            localStorage.setItem("movimenti",JSON.stringify(movimenti));                            
+                            movimenti.unshift(movimento);
+                            localStorage.setItem("movimenti",JSON.stringify(movimenti));
                             localStorage.setItem("borsellino",res_borsellino);
-                            
+
                         });
                     });
-                               
-                }); 
-                
-                
+
+                });
+
+
 
                 try {
-                    App.restore();                
+                    App.restore();
                 } catch (err) {
                     App.load('home');
                 }
